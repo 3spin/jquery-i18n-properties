@@ -412,9 +412,10 @@
   /** Ensure language code is in the format aa_AA. */
   $.i18n.normaliseLanguageCode = function (lang) {
 
-    if (!lang || lang.length < 2) {
-      lang = (navigator.languages) ? navigator.languages[0]
-                                        : (navigator.language || navigator.userLanguage /* IE */ || 'en');
+    if (navigator.languages && typeof navigator.languages[0] !== 'undefined') {
+      lang = navigator.languages[0];
+    } else {
+      lang = (navigator.language || navigator.userLanguage /* IE */ || 'en');
     }
 
     lang = lang.toLowerCase();
